@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendQueueMailJob;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SendMailController extends Controller
@@ -12,15 +13,24 @@ class SendMailController extends Controller
         $data = [
             'title' => 'Send Mail Page',
         ];
-        return view('mail.send_mail', $data);
+        return view('mail.index', $data);
     }
 
     public function sendMail(Request $request)
     {
-        //Kirim semua inputan ke $data
-        $data = $request->all();
+        $user = User::where('role', $request->role)->get();
+        foreach ($user as $value) {
+            $data[] = [
+                'email' => $value['email'],
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ];
+        }
 
-        dispatch(new SendQueueMailJob($data));
-        return redirect('/send-mail')->with('success', 'Berhasil Kirim Email');
+        try {
+            dispatch(new SendQueueMailJob($data));
+            return redirect('/send-mail')->with('success', 'Berhasil Kirim Email');
+        } catch (\Exception $e) {
+        }
     }
 }
