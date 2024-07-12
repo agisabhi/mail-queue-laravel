@@ -10,6 +10,17 @@
 
     <div class="container col-lg-6 mt-4">
         <h3 align="center">Send Mail Queue Form</h3>
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif (session()->has('error'))
+            <div class="alert alert-error alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <form action="/send_mail_action" method="POST">
             @csrf
             <div class="mb-3">
@@ -18,6 +29,7 @@
                     <option value="">Select...</option>
                     <option value="customer">Customer</option>
                     <option value="user">User</option>
+                    <option value="admin">Admin</option>
                 </select>
                 
             </div>

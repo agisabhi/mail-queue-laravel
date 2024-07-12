@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendQueueMailJob;
+use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SendMailController extends Controller
 {
@@ -20,16 +22,18 @@ class SendMailController extends Controller
     {
         $user = User::where('role', $request->role)->get();
         foreach ($user as $value) {
-            $data[] = [
+            $maildata = [
                 'email' => $value['email'],
                 'subject' => $request->subject,
                 'message' => $request->message,
             ];
         }
 
+
+
         try {
-            dispatch(new SendQueueMailJob($data));
-            return redirect('/send-mail')->with('success', 'Berhasil Kirim Email');
+            dispatch(new SendQueueMailJob($maildata));
+            return redirect('/')->with('success', 'Berhasil Kirim Email');
         } catch (\Exception $e) {
         }
     }

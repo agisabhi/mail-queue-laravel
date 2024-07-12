@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $value;
+    public $value;
     /**
      * Create a new message instance.
      */
@@ -34,8 +34,9 @@ class SendMail extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    public function content()
     {
+        // return dd($this->maildata);
         return new Content(
             markdown: 'mail.send_mail',
         );

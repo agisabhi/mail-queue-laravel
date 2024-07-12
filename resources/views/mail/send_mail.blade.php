@@ -1,7 +1,7 @@
 <x-mail::message>
 
 
-{{ $value['message'] }}
+{{ $maildata['message'] }}
 
 Thanks,<br>
 {{ config('app.name') }}

@@ -13,13 +13,14 @@ use Illuminate\Foundation\Bus\Dispatchable;
 class SendQueueMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $data;
+    public $maildata;
+    public $timeout = 7200;
     /**
      * Create a new job instance.
      */
-    public function __construct($data)
+    public function __construct($maildata)
     {
-        $this->data = $data;
+        $this->maildata = $maildata;
     }
 
     /**
@@ -27,7 +28,7 @@ class SendQueueMailJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->data as $value) {
+        foreach ($this->maildata as $value) {
             try {
                 Mail::to($value['email'])->send(new SendMail($value));
             } catch (\Throwable $th) {
