@@ -12,13 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    protected $value;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($value)
     {
-        //
+        $this->value = $value;
     }
 
     /**
@@ -27,7 +27,7 @@ class SendMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Mail',
+            subject: $this->value['subject'],
         );
     }
 

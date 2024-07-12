@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
