@@ -12,12 +12,12 @@
         <h3 align="center">Send Mail Queue Form</h3>
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @elseif (session()->has('error'))
             <div class="alert alert-error alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -38,11 +38,11 @@
                 <input type="text" class="form-control" id="exampleInputPassword1" name="subject">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Subject</label>
+                <label for="exampleInputPassword1" class="form-label">Message</label>
                 <textarea name="message" class="form-control" cols="20" rows="10" required "></textarea>
             </div>
             
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Send</button>
         </form>
     </div>
     

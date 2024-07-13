@@ -22,14 +22,12 @@ class SendMailController extends Controller
     {
         $user = User::where('role', $request->role)->get();
         foreach ($user as $value) {
-            $maildata = [
+            $maildata[] = [
                 'email' => $value['email'],
                 'subject' => $request->subject,
                 'message' => $request->message,
             ];
         }
-
-
 
         try {
             dispatch(new SendQueueMailJob($maildata));

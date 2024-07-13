@@ -16,3 +16,4 @@ use App\Http\Controllers\SendMailController;
 
 Route::get('/', [SendMailController::class, "index"]);
 Route::post('/send_mail_action', [SendMailController::class, "sendMail"]);
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
