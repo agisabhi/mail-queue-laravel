@@ -39,7 +39,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Message</label>
-                <textarea name="message" class="form-control" cols="20" rows="10" required "></textarea>
+                <textarea name="message" class="form-control" cols="20" rows="10" required ></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary">Send</button>
